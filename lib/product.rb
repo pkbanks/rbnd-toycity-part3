@@ -10,8 +10,6 @@ class Product
 		@price = options[:price]
 		@stock = options[:stock]
 
-		# raise DuplicateProductError if Product.find_by_title(@title)
-			
 		add_to_products
 		
 	end
@@ -23,6 +21,10 @@ class Product
 		# else return false
 
 		@stock > 0 ? true : false
+	end
+
+	def reduce_stock
+		@stock -= 1
 	end
 
 	def self.all
@@ -49,4 +51,5 @@ class Product
 	def add_to_products
 		@@products << self
 	end
+
 end
