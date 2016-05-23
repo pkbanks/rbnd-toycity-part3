@@ -10,8 +10,10 @@ class Product
 		@price = options[:price]
 		@stock = options[:stock]
 
+		# raise DuplicateProductError if Product.find_by_title(@title)
+			
 		add_to_products
-
+		
 	end
 
 	def in_stock?
@@ -37,7 +39,7 @@ class Product
 		# returns an array of all products with a stock greater than zero
 		result = []
 		@@products.each do |product|
-			result << product if product.in_stock
+			result << product if product.in_stock?
 		end
 		return result
 	end
