@@ -10,8 +10,11 @@ class Product
 		@price = options[:price]
 		@stock = options[:stock]
 
-		add_to_products
-		
+		begin
+			add_to_products
+		rescue DuplicateProductError
+			puts "DuplicateProductError: '#{@title}' already exists."
+		end
 	end
 
 	def in_stock?
@@ -32,9 +35,13 @@ class Product
 	end
 
 	def self.find_by_title(title)
+		# title: string, product name/title
+		# returns a product with the specified title
+		# returns nil if a product of that title is not found
 		@@products.each do |product|
 			return product if product.title == title
 		end
+		nil
 	end
 
 	def self.in_stock
@@ -49,6 +56,9 @@ class Product
 	private
 
 	def add_to_products
+		if Product.find_by_title(self.title)
+			raise DuplicateProductError
+		end
 		@@products << self
 	end
 

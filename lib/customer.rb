@@ -9,7 +9,11 @@ class Customer
 
 	def initialize(options={})
 		@name = options[:name]
-		add_to_customers
+		begin
+			add_to_customers
+		rescue DuplicateCustomerError
+			puts "DuplicateCustomerError: '#{@name}' already exists."
+		end
 	end
 
 	def purchase(product)
@@ -24,11 +28,17 @@ class Customer
 		@@customers.each do |customer|
 			return customer if customer.name == name
 		end
+		nil
 	end
 
 	private
 
 	def add_to_customers
+		# puts "hihi #{Customer.find_by_name(self.name).nil?}"
+		# puts "hoho #{Customer.find_by_name(self.name)}"
+		if Customer.find_by_name(self.name)
+			raise DuplicateCustomerError
+		end
 		@@customers << self
 	end
 end
