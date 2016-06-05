@@ -17,7 +17,11 @@ class Customer
 	end
 
 	def purchase(product)
-		Transaction.new(self, product)
+		begin
+			Transaction.new(self, product)
+		rescue OutOfStockError
+			puts "OutOfStockError: 'LEGO Firehouse Headquarter' is out of stock."
+		end
 	end
 
 	def self.all

@@ -8,6 +8,9 @@ class Transaction
 	@@transactions = []
 
 	def initialize(customer, product)
+
+		# raise an error if the product is out of stock
+		raise OutOfStockError unless product.in_stock?
 		
 		@id = @@id
 		@@id += 1
