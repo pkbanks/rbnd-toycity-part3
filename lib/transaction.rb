@@ -34,5 +34,19 @@ class Transaction
 		end
 	end
 
+	def self.find_by_customer(customer)
+		# customer: an instance of the customer class
+		# returns an array of transactions
+		# assumes that the customer exists // whether a customer exists should be handled where it's called
+		# if the customer exists and there are no transactions, return an empty array
+		result = []
+		@@transactions.each do |transaction|
+			if transaction.customer == customer
+				result << transaction
+			end
+		end
+		result
+	end
+
 
 end

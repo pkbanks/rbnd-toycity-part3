@@ -1,20 +1,35 @@
 # lib/product.rb
 
 class Product
-	attr_reader :title, :price, :stock
+	attr_reader :title, :price, :stock, :brand
 
-	@@products = []
+	@@products = []		# class attribute // see self.all class method
 
 	def initialize(options={})
 		@title = options[:title]
 		@price = options[:price]
 		@stock = options[:stock]
+		@brand = options[:brand]
 
 		begin
-			add_to_products
-		rescue DuplicateProductError
+			add_to_products		# try to add a new product
+		rescue DuplicateProductError		# if the product already exists, record it in the log
 			puts "DuplicateProductError: '#{@title}' already exists."
 		end
+	end
+
+	def edit(options={})
+		# updates the attributes of an existing product
+		# if the new title already exists, raises an error, even if the duplicate title is itself
+		# returns true if no error is raised
+		if Product.find_by_title(options[:title])
+			raise DuplicateProductError
+		end
+		@title = options[:title]
+		@price = options[:price]
+		@stock = options[:stock]
+		@brand = options[:brand]
+		true
 	end
 
 	def in_stock?
@@ -26,11 +41,12 @@ class Product
 		@stock > 0 ? true : false
 	end
 
-	def reduce_stock
+	def reduce_stock		# probably should make this method private?
 		@stock -= 1
 	end
 
 	def self.all
+		# returns the class attribute, an array of all products
 		@@products
 	end
 
@@ -56,7 +72,7 @@ class Product
 	private
 
 	def add_to_products
-		if Product.find_by_title(self.title)
+		if Product.find_by_title(self.title)		# if a product of the same name already exists, raise a duplicate product error
 			raise DuplicateProductError
 		end
 		@@products << self

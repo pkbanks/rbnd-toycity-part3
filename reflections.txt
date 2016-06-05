@@ -1,0 +1,64 @@
+# reflections.txt
+
+How long did you spend working on this project?
+	about 5-7 hours
+	choppy progress, took 5-6 sittings stretched over 15 days
+
+What was the most rewarding challenge you conquered?
+	error handling
+
+What two additional features did you build?  Why?
+	• Transaction.find_by_customer method
+			This class method returns an array of transactions by the customer.
+			This is more useful than finding a transaction by ID when we
+			want to pull transaction history by customer.
+	• Product.edit(options={}) method
+			This method provides a way to update, revise, or add properties to the product.
+			Without this method there's no way to make any changes to existing products.
+			The method raises an error if a product of the same name already exists, even if the duplicate title is itself.
+
+Where do you still have room to grow?
+	self-discipline, consistency
+	error handling
+
+Things to think about for future versions:
+	• rules for raising duplicate errors can be refined:
+		- is a product's defining attribute really its name?
+				What if we have something like clothing, which has styling features that are distinct,
+					but come in different colors and sizes?  wouldn't this potentially bloat our product database?
+		- a customer's defining attribute is not their name
+				We can easily conceive of cases in which different customers share the same
+					name.
+				A better way to classify customers uniquely would be with a unique and relateable identifier,
+					that is unlikely to change, such as email address or phone number.
+	• how would we handle dynamic pricing?
+		- in the original design, the price of a product is attached to the product, which means that we can't
+				charge different prices for the same product without creating a duplicate product.  we might want to do
+				this to test pricing elasticity or to run a targeted promotion.
+		- how would we design a system to accommodate user-based, product-based, and cart-based price promotions?
+				Here are some examples of such promotions:
+					• User-based: "Welcome!  Get 25 percent off your first order."
+					• Product-based: "Buy one get one free."
+					• Cart-based: "Free shipping for orders over $20."
+	• what are some additional customer-based fields we would like to gather?
+		- how do we balance between fields that we would like, versus inhibiting a customer on-boarding process
+				that would encumber the experience?
+	• when should we start to care about permissions?
+		- who in the company should have access to what data (CRUD)?
+	• should we enable customers to do any of the following?
+		- ask questions about the product?  would questions and answers be visible to all?
+		- should product reviews be enabled and visible?  how do we ensure reviews are genuine?  is that a legitimate concern?
+		- how would customers revise or update their personal information?
+		- sometimes we make mistakes just after purchase and want to change the payment method or delivery address.
+				how would customers revise or update their order?
+	• how would we integrate this system with order fulfillment?
+		- how are products picked, packed, and shipped?
+		- how do we notify customers with pertinent and timely updates?
+	• shouldn't we add product photographs?
+		- how do we organize them in the data structure?
+		- do we have multiple photographs?  is there a primary photograph?
+		- do we need to have different image resolutions to handle the device and minimize latency?
+	• how do we enable a search feature?
+		- do we add tags?  how are these tags defined and managed?
+	• how do we enable social networking/sharing to promote products and the customer experience?
+	• how do we handle gifts? gift cards?

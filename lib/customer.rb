@@ -10,8 +10,8 @@ class Customer
 	def initialize(options={})
 		@name = options[:name]
 		begin
-			add_to_customers
-		rescue DuplicateCustomerError
+			add_to_customers			# try to add a new customer
+		rescue DuplicateCustomerError		# if a customer of the same name already exists, record it in the log
 			puts "DuplicateCustomerError: '#{@name}' already exists."
 		end
 	end
@@ -20,7 +20,7 @@ class Customer
 		begin
 			Transaction.new(self, product)
 		rescue OutOfStockError
-			puts "OutOfStockError: 'LEGO Firehouse Headquarter' is out of stock."
+			puts "OutOfStockError: '#{product.title}' is out of stock."
 		end
 	end
 

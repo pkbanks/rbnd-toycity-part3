@@ -3,6 +3,12 @@ require_relative "lib/customer"
 require_relative "lib/product"
 require_relative "lib/transaction"
 
+
+=begin
+	See reflections.txt for thoughts about what features should be added or considered.
+=end
+
+
 # PRODUCTS
 
 Product.new(title: "LEGO Iron Man vs. Ultron", price: 22.99, stock: 55)
