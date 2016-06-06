@@ -1,26 +1,23 @@
 # reflections.txt
 
 How long did you spend working on this project?
-	about 5-7 hours
-	choppy progress, took 5-6 sittings stretched over 15 days
+	I invested about 5-7 hours into this project.  Progress was inconsistent and the work was unevenly distributed across a 15-day period.
 
 What was the most rewarding challenge you conquered?
-	error handling
+	I have always had a difficult time implementing error-handling techniques, such as where to use the begin/rescue/end construct, and where to raise an error.  In this project I think I did it properly, but I would appreciate an expert's opinion.
 
 What two additional features did you build?  Why?
 	• Transaction.find_by_customer method
 			This class method returns an array of transactions by the customer.
-			This is more useful than finding a transaction by ID when we
-			want to pull transaction history by customer.
+			This is more useful than finding a transaction by ID when we want to pull transaction history by customer.
 	• Product.edit(options={}) method
 			This method provides a way to update, revise, or add properties to the product.
 			Without this method there's no way to make any changes to existing products.
 			The method raises an error if a product of the same name already exists, even if the duplicate title is itself.
 
 Where do you still have room to grow?
-	self-discipline, consistency
-	error handling
-
+	Until I demonstrate the self-discipline necessary to code with consistency my skills will continue to languish.
+	
 Things to think about for future versions:
 	• rules for raising duplicate errors can be refined:
 		- is a product's defining attribute really its name?
