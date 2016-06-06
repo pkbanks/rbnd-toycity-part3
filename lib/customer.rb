@@ -19,8 +19,8 @@ class Customer
 	def purchase(product)
 		begin
 			Transaction.new(self, product)
-		rescue OutOfStockError
-			puts "OutOfStockError: '#{product.title}' is out of stock."
+		rescue OutOfStockError => e
+			puts e.message
 		end
 	end
 

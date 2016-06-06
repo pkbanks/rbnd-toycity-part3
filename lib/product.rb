@@ -37,12 +37,24 @@ class Product
 		# if product's stock is greater than zero
 		# return true
 		# else return false
-
 		@stock > 0 ? true : false
 	end
 
-	def reduce_stock		# probably should make this method private?
-		@stock -= 1
+	# def reduce_stock		# probably should make this method private?
+	# 	@stock -= 1
+	# end
+
+	def reduce_stock
+		# suggested by udacity code review
+=begin
+		This is actually the best place to raise your out of stock error, 
+		since it's the last time you can check the stock before actually depleting it.
+		It's a good principle to let objects handle errors related to their own attributes
+		rather than raising it externally, which is what you've done here,
+		by raising the error in the Customer class.
+=end	
+		raise OutOfStockError, "#{title} is out of Stock." unless self.in_stock?
+	  @stock -= 1
 	end
 
 	def self.all
@@ -62,11 +74,18 @@ class Product
 
 	def self.in_stock
 		# returns an array of all products with a stock greater than zero
-		result = []
-		@@products.each do |product|
-			result << product if product.in_stock?
-		end
-		return result
+		# my original code
+		# result = []
+
+		# @@products.each do |product|
+		# 	result << product if product.in_stock?
+		# end
+		# return result
+
+		# Suggestion by udacity code review.
+		# Arrays have a built in method called select that provides a convenient filter:
+		@@products.select { |product| product.in_stock? }
+
 	end
 
 	private
